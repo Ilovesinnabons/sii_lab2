@@ -1,0 +1,10 @@
+﻿namespace sii_lab2
+{
+    public partial class AppShell : Shell
+    {
+        public AppShell()
+        {
+            InitializeComponent();
+        }
+    }
+}

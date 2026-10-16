@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="sii_lab2.MainPage"
+             Title="Экспертная система">
+
+    <ScrollView x:Name="MainScroll">
+        <VerticalStackLayout Padding="20" Spacing="10">
+            <Label x:Name="ErrorLabel" TextColor="Red" IsVisible="False" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="30">
+
+                <!-- ЛЕВАЯ КОЛОНКА: вывод -->
+                <VerticalStackLayout Grid.Column="0" Spacing="10">
+
+                    <!-- Пункт 3 задания: начальное состояние рабочей базы данных -->
+                    <Label Text="Начальное состояние РБД" FontSize="18" FontAttributes="Bold" />
+                    <Label Text="Задайте известные факты, остальные параметры оставьте «—»" FontSize="12" TextColor="Gray" />
+                    <VerticalStackLayout x:Name="StartPanel" Spacing="4" />
+
+                    <!-- Пункт 4 задания: целевая ситуация (один или несколько фактов, соединённых И) -->
+                    <Label Text="Целевая ситуация" FontSize="18" FontAttributes="Bold" />
+                    <VerticalStackLayout x:Name="GoalPanel" Spacing="4" />
+                    <Button Text="+ факт цели (И)" Clicked="OnAddGoalFactClicked" HorizontalOptions="Start" />
+
+                    <Button Text="Доказать" Clicked="OnProveClicked" />
+
+                    <Label x:Name="ResultLabel" FontSize="20" FontAttributes="Bold" />
+
+                    <Label Text="Рабочая база данных" FontSize="18" FontAttributes="Bold" />
+                    <Label x:Name="MemoryLabel" Text="(пусто)" />
+
+                    <Label Text="Журнал доказательства" FontSize="18" FontAttributes="Bold" />
+                    <Label x:Name="LogLabel" FontFamily="Consolas" FontSize="12" />
+                </VerticalStackLayout>
+
+                <!-- ПРАВАЯ КОЛОНКА: параметры и правила -->
+                <VerticalStackLayout Grid.Column="1" Spacing="10">
+
+                    <Label Text="Параметры" FontSize="18" FontAttributes="Bold" />
+                    <VerticalStackLayout x:Name="ParamsPanel" Spacing="4" />
+                    <Button Text="Добавить параметр" Clicked="OnAddParameterClicked" />
+
+                    <Label Text="База правил" FontSize="18" FontAttributes="Bold" />
+                    <Label x:Name="RulesFileLabel" FontSize="12" TextColor="Gray" />
+                    <Button Text="Новое правило" Clicked="OnNewRuleClicked" />
+
+                    <!-- Редактор правила: и для нового правила, и для изменения существующего -->
+                    <Border x:Name="RuleEditorPanel" IsVisible="False" Padding="10">
+                        <VerticalStackLayout Spacing="6">
+                            <Label x:Name="RuleEditorTitle" FontSize="16" FontAttributes="Bold" />
+                            <Label Text="ЕСЛИ" FontAttributes="Bold" />
+                            <VerticalStackLayout x:Name="ConditionsPanel" Spacing="4" />
+                            <Button Text="+ условие (И)" Clicked="OnAddConditionClicked" HorizontalOptions="Start" />
+                            <Label Text="ТО" FontAttributes="Bold" />
+                            <Grid ColumnDefinitions="*,*" ColumnSpacing="6">
+                                <Picker x:Name="ConclusionParamPicker" Title="параметр"
+                                        SelectedIndexChanged="OnConclusionParamChanged" />
+                                <Picker x:Name="ConclusionValuePicker" Grid.Column="1" Title="значение" />
+                            </Grid>
+                            <HorizontalStackLayout Spacing="10">
+                                <Button Text="Сохранить правило" Clicked="OnSaveRuleClicked" />
+                                <Button Text="Отмена" Clicked="OnCancelRuleClicked" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </Border>
+
+                    <VerticalStackLayout x:Name="RulesPanel" Spacing="4" />
+                </VerticalStackLayout>
+
+            </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
